@@ -3,8 +3,27 @@ import {
   Mail, Phone, MapPin, ExternalLink, Award, BookOpen,
   Briefcase, GraduationCap, FlaskConical, Users, FileText,
   Star, ChevronDown, Menu, X, Globe, Cpu, Wifi, Radio,
-  BookMarked, Microscope, Zap, CheckCircle, Loader2, Send
+  BookMarked, Microscope, Zap, CheckCircle, Loader2, Send, Trophy
 } from 'lucide-react';
+
+/* ═══════════════════════════ BRAND ICONS ═══════════════════════════ */
+/* Lucide does not include brand logos by policy. We use inline SVGs. */
+
+function WhatsAppIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  );
+}
+
+function YouTubeIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+  );
+}
 import { supabase } from './lib/supabase';
 
 /* ════════════════════════════════════ DATA ══════════════════════════════════ */
@@ -132,13 +151,11 @@ const BOOKS = [
   { title:'Electromagnetic Fields (2nd Ed.)',       authors:'Dr. P. Rajeswari, A. Yogeshwaran, et al.', publisher:'Charulatha Publications', isbn:'978-93-95211-16-1', type:'Book' },
   { title:'Emerging Innovative Research in S&T — Ch. 24', authors:'T. Boopathy, N.K. Basha, A. Yogeshwaran, S. Nithya', publisher:'Collective Publication', isbn:'978-93-91977-32-0', type:'Chapter' },
   { title:'Adversarial ML & AI Security: Safeguarding Industry 4.0 — Ch. 2', authors:'V. Vakula, A. Yogeshwaran, et al.', publisher:'De Gruyter (Scopus)', isbn:'DOI: 10.1515/9783112213049-002', type:'Chapter' },
+  { title:'Innovations in VLSI Architecture and Digital Signal Processing', authors:'Dr. M. Kamarajan, Mrs. Dimple Juneja, Dr. A. Yogeshwaran, Dr. S. Muthurajan', publisher:'Book Chapter', isbn:'978-81-686017-8-9', type:'Chapter' },
 ];
 
 const AWARDS = [
-  'Cash Award — 100% university exam results (2 times)',
-  'Cash Award — Above 95% university exam results (4 times)',
-  'Appreciation Letter — 95% and 80% results in university examinations',
-  'Certificate of Excellence in Reviewing — Physical Science International Journal',
+  { title: 'Research Excellence Award', description: 'Received the Research Award twice for publishing research papers indexed in Scopus and SCI journals.', icon: 'trophy' },
 ];
 
 const ACTIVITIES = [
@@ -181,9 +198,6 @@ export default function App() {
         scrolled ? 'bg-charcoal-950/96 backdrop-blur-md shadow-2xl shadow-black/30' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-          <a href="#" className="font-display font-bold text-base text-white tracking-wide">
-            Dr. A. <span className="text-gold-400">Yogeshwaran</span>
-          </a>
           <div className="hidden lg:flex items-center gap-7">
             {NAV_LINKS.map(l => (
               <a key={l.href} href={l.href}
@@ -211,38 +225,54 @@ export default function App() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="hero-bg relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 hero-glow pointer-events-none"/>
-        <div className="absolute right-0 top-0 w-[700px] h-[700px] rounded-full border border-gold-500/10 translate-x-1/3 -translate-y-1/3 pointer-events-none"/>
-        <div className="absolute right-0 top-0 w-[480px] h-[480px] rounded-full border border-gold-500/8 translate-x-1/3 -translate-y-1/3 pointer-events-none"/>
-
+      
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="fade-up">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold-500/30 bg-gold-500/10 text-gold-300 text-xs font-bold tracking-widest uppercase mb-6">
-                <span className="w-1.5 h-1.5 bg-gold-400 rounded-full animate-pulse"/>
-                Associate Professor · ECE Department
-              </div>
               <h1 className="font-display text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-4">
                 Dr. A.<br/>
                 <span className="bg-gradient-to-r from-gold-300 via-gold-400 to-amber-300 bg-clip-text text-transparent">
                   Yogeshwaran
                 </span>
               </h1>
-              <p className="text-zinc-400 text-base leading-relaxed mb-8 max-w-lg">
-                Ph.D in Microwave Engineering · RF &amp; Antenna specialist with
-                <strong className="text-zinc-200"> 14+ years</strong> of academic excellence,
-                <strong className="text-zinc-200"> 24 journal publications</strong>, and
-                <strong className="text-zinc-200"> 2 patents</strong> in wireless communication research.
-              </p>
-              <div className="flex flex-wrap gap-3 mb-8">
-                <a href="mailto:er.yogesh85@gmail.com"
+                <div className="mt-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold-500/40 bg-gold-500/5 text-gold-400 text-sm font-semibold tracking-wide">
+                 <span className="w-1.5 h-1.5 bg-gold-400 rounded-full ..."/>
+                  Associate Professor · ECE Department
+                   </div>
+              </div>
+            
+              <div className="flex flex-wrap gap-3 mb-4 mt-4">
+                <a href="mailto:dryogeshwaran23@gmail.com"
                   className="flex items-center gap-2 px-4 py-2 bg-gold-500/10 border border-gold-500/25 rounded-full text-gold-300 text-sm hover:bg-gold-500/20 transition-colors">
-                  <Mail size={13}/> er.yogesh85@gmail.com
+                  <Mail size={13}/> dryogeshwaran23@gmail.com
                 </a>
-                <a href="tel:919944877208"
+                <a href="tel:9199448 77208"
                   className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-zinc-300 text-sm hover:bg-white/10 transition-colors">
-                  <Phone size={13}/> +91-9944877208
+                  <Phone size={13}/> +91-99448 77208
                 </a>
               </div>
+
+            {/* Research Identifiers */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              <a href="https://orcid.org/0000-0003-0080-0828" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs font-mono hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all">
+                <Globe size={11}/> ORCID
+              </a>
+              <a href="https://www.scopus.com/authid/detail.uri?authorId=57164021900" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-xs font-mono hover:bg-blue-500/20 hover:border-blue-500/50 transition-all">
+                <Globe size={11}/> Scopus
+              </a>
+              <a href="https://vidwan.inflibnet.ac.in/profile/580848" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-mono hover:bg-purple-500/20 hover:border-purple-500/50 transition-all">
+                <Globe size={11}/> VIDWAN
+              </a>
+              <a href="https://www.webofscience.com/wos/author/record/NZO-3696-2025" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-mono hover:bg-amber-500/20 hover:border-amber-500/50 transition-all">
+                <Globe size={11}/> Researcher
+              </a>
+            </div>
+
               <div className="flex gap-3">
                 <a href="#publications" className="btn-gold px-6 py-2.5 text-white font-bold rounded-xl text-sm">View Publications</a>
                 <a href="#contact" className="px-6 py-2.5 bg-white/8 hover:bg-white/14 text-white font-semibold rounded-xl text-sm transition-all border border-white/15">
@@ -262,13 +292,7 @@ export default function App() {
                   <div className="absolute bottom-0 inset-x-0 h-20"
                     style={{ background:'linear-gradient(to top, rgba(24,24,27,.65), transparent)' }}/>
                 </div>
-                <div className="absolute -bottom-4 -right-4 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg"
-                  style={{ background:'linear-gradient(135deg,#d97706,#f59e0b)' }}>
-                  14+ Yrs Experience
-                </div>
-                <div className="absolute -top-4 -left-4 bg-zinc-800 border border-gold-500/30 text-gold-300 text-xs font-bold px-4 py-2 rounded-xl shadow-lg">
-                  Ph.D · Anna University
-                </div>
+                
               </div>
             </div>
           </div>
@@ -320,32 +344,7 @@ export default function App() {
             </div>
 
             <div className="lg:col-span-2 space-y-6">
-              {/* Research Identifiers Card */}
-              <div className="bg-white rounded-2xl shadow-lg border border-stone-200 p-6">
-                <p className="text-xs font-bold text-gold-600 uppercase tracking-widest mb-4 flex items-center gap-2">
-                  <Globe size={14}/> Research Identifiers
-                </p>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 bg-stone-50 rounded-xl hover:bg-stone-100 transition-colors">
-                    <span className="text-sm text-stone-600 font-semibold">ORCID</span>
-                    <span className="font-mono text-xs px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">0000-0003-0080-0828</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-stone-50 rounded-xl hover:bg-stone-100 transition-colors">
-                    <span className="text-sm text-stone-600 font-semibold">Scopus ID</span>
-                    <span className="font-mono text-xs px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">57164021900</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-stone-50 rounded-xl hover:bg-stone-100 transition-colors">
-                    <span className="text-sm text-stone-600 font-semibold">VIDWAN ID</span>
-                    <span className="font-mono text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">580848</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-stone-50 rounded-xl hover:bg-stone-100 transition-colors">
-                    <span className="text-sm text-stone-600 font-semibold">Researcher</span>
-                    <span className="font-mono text-xs px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200">NZO-3696-2025</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Personal Card */}
+{/* Personal Card */}
               <div className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 rounded-2xl shadow-xl p-6 text-white">
                 <p className="text-xs font-bold text-gold-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                   <Users size={14}/> Personal Information
@@ -548,17 +547,18 @@ export default function App() {
           <SH icon={<BookOpen size={16}/>} title="Books & Book Chapters" sub="7 Published Works"/>
           <div className="mt-12 space-y-0">
             {BOOKS.map((b,i) => (
-              <div key={i} className="open-row grid md:grid-cols-4 gap-4 md:gap-8 items-baseline">
+              <div key={i} className={`open-row grid md:grid-cols-4 gap-4 md:gap-8 items-baseline ${b.title.includes('VLSI') ? 'bg-gold-50/50 -mx-4 px-4 rounded-xl border border-gold-200/50' : ''}`}>
                 <div className="md:col-span-2">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className={`pub-badge ${b.type==='Chapter'?'badge-wos':'badge-sci'}`}>{b.type}</span>
+                    <span className={`pub-badge ${b.type==='Chapter'?'badge-wos':'badge-sci'} ${b.title.includes('VLSI') ? 'ring-2 ring-gold-300 ring-offset-1' : ''}`}>{b.type}</span>
+                    {b.title.includes('VLSI') && <span className="text-xs font-bold text-gold-600 bg-gold-100 px-2 py-0.5 rounded-full">NEW</span>}
                   </div>
-                  <p className="font-semibold text-charcoal-800 text-sm leading-snug">"{b.title}"</p>
+                  <p className={`font-semibold text-sm leading-snug ${b.title.includes('VLSI') ? 'text-charcoal-900 text-base' : 'text-charcoal-800'}`}>"{b.title}"</p>
                 </div>
                 <p className="text-stone-400 text-xs">{b.authors}</p>
                 <div className="text-right text-xs">
                   <p className="text-gold-700 font-semibold">{b.publisher}</p>
-                  <p className="text-stone-400 font-mono mt-0.5">{b.isbn}</p>
+                  <p className={`font-mono mt-0.5 ${b.title.includes('VLSI') ? 'text-gold-700 font-bold bg-gold-100 inline-block px-2 py-0.5 rounded' : 'text-stone-400'}`}>{b.isbn}</p>
                 </div>
               </div>
             ))}
@@ -574,9 +574,20 @@ export default function App() {
             <div>
               <p className="text-xs font-bold text-gold-600 uppercase tracking-widest mb-6">Awards</p>
               {AWARDS.map((a,i) => (
-                <div key={i} className="open-row flex items-start gap-3">
-                  <Star size={12} className="text-gold-400 flex-shrink-0 mt-0.5" fill="#f59e0b"/>
-                  <p className="text-charcoal-700 text-sm font-medium">{a}</p>
+                <div key={i} className="open-row">
+                  <div className="flex items-start gap-4 p-5 bg-gradient-to-br from-charcoal-900 to-charcoal-800 rounded-2xl border border-gold-500/20 shadow-xl">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/10 border border-gold-500/30 flex items-center justify-center">
+                      <Trophy size={22} className="text-gold-400"/>
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-display font-bold text-white text-lg mb-1">{a.title}</h4>
+                      <p className="text-zinc-400 text-sm leading-relaxed">{a.description}</p>
+                      <div className="flex gap-2 mt-3">
+                        <span className="px-2 py-0.5 bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-bold rounded-full">Scopus</span>
+                        <span className="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold rounded-full">SCI</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -604,6 +615,54 @@ export default function App() {
         </p>
         <p className="text-zinc-700 text-xs mt-1">Associate Professor · Ph.D (Microwave Engineering) · Anna University</p>
       </footer>
+      <FloatingButtons />
+    </div>
+  );
+}
+
+
+/* ═══════════════════════════ FLOATING CONTACT BUTTONS ═══════════════════════════ */
+
+function FloatingButtons() {
+  return (
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+      {/* WhatsApp */}
+      <a
+        href="https://wa.me/919944877208"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        className="group relative w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+        style={{
+          background: 'linear-gradient(135deg, #25D366, #128C7E)',
+          boxShadow: '0 4px 14px rgba(37, 211, 102, 0.4)',
+        }}
+      >
+        <WhatsAppIcon size={22} />
+        {/* Tooltip */}
+        <span className="absolute right-14 bg-charcoal-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none shadow-lg border border-zinc-700">
+          WhatsApp
+        </span>
+      </a>
+
+      {/* YouTube */}
+      <a
+        href="https://www.youtube.com/@YogisLECTURES"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="YouTube Channel"
+        className="group relative w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+        style={{
+          background: 'linear-gradient(135deg, #FF0000, #CC0000)',
+          boxShadow: '0 4px 14px rgba(255, 0, 0, 0.4)',
+        }}
+      >
+        <YouTubeIcon size={22} />
+        {/* Tooltip */}
+        <span className="absolute right-14 bg-charcoal-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none shadow-lg border border-zinc-700">
+          YouTube
+        </span>
+      </a>
     </div>
   );
 }
@@ -656,9 +715,9 @@ function ContactSection() {
 
             <div className="space-y-4">
               {[
-                { icon:Mail,  label:'Email',    val:'er.yogesh85@gmail.com',     href:'mailto:er.yogesh85@gmail.com' },
+                { icon:Mail,  label:'Email',    val:'dryogeshwaran23@gmail.com',     href:'mailto:dryogeshwaran23@gmail.com' },
                 { icon:Mail,  label:'Academic', val:'yogeshwaranaphd@gmail.com', href:'mailto:yogeshwaranaphd@gmail.com' },
-                { icon:Phone, label:'Mobile',   val:'+91-9944877208',            href:'tel:919944877208' },
+                { icon:Phone, label:'Mobile',   val:'+91-99448 77208',            href:'tel:9199448 77208' },
                 { icon:MapPin,label:'Address',  val:'DSEC, Perambalur, Tamil Nadu', href:'#' },
               ].map(c => (
                 <a key={c.label} href={c.href}
